@@ -1,0 +1,45 @@
+body {
+	font-family:arial;
+	padding:20px;
+}
+.bd {
+	text-align:center;
+}
+.container {
+	margin:0 auto;
+	width:750;
+}
+/* .slot {
+	margin-right: 2px;
+	float:left;
+	border:1px dashed rgb(141, 139, 139);
+	background-position:0 4px;
+} */
+.stage {
+	width: 705;
+}
+button {
+	border: none;
+	padding: 20px;
+	background-color: transparent;
+	outline: none !important;
+}
+#outcome {
+	margin:20px 0;
+	font-size:32px;
+	font-weight:lighter;
+	height:22px;
+}
+.credits {
+	font-size:15px;
+	margin-top:20px;
+}
+.credits .browsers {
+	font-style:italic;
+	font-size:14px;
+	color:rgb(170, 50, 50);
+	margin-top:4px;
+}
+.clear {
+	clear:both;
+}
