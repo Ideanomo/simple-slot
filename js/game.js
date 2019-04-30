@@ -78,7 +78,7 @@ window.onload = function () {
                 drawingSurfacesArray.push(drawingSurface);
             });
 
-            // // Check array for content
+            // Check array for content
              // console.log(canvasArray);
              // console.log(drawingSurfacesArray);
 
