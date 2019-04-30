@@ -41,7 +41,7 @@ window.onload = function () {
             loaded += 1;
         }
 
-         console.log(loadedImagesArray);
+         // console.log(loadedImagesArray);
     }
 
     // Initialise reels at start
@@ -63,14 +63,13 @@ window.onload = function () {
 
     // Do this when all images have loaded and reels initialised
     function loadHandler() {
-        debugger;
         if (loaded === toload) {
-            console.log('All images loaded');
+            // console.log('All images loaded');
 
             // Get all images expect the button and put in symbolsArray
             for (var i = 1; i < loadedImagesArray.length; i++) {
                 symbolsArray.push(loadedImagesArray[i]);
-                console.log(symbolsArray);
+                // console.log(symbolsArray);
             }
 
             canvases.forEach(canvas => {
@@ -80,8 +79,8 @@ window.onload = function () {
             });
 
             // // Check array for content
-             console.log(canvasArray);
-             console.log(drawingSurfacesArray);
+             // console.log(canvasArray);
+             // console.log(drawingSurfacesArray);
 
             // Create sprites from loaded images
             for (var i = 0; i < symbolsArray.length; i++) { // skip button
@@ -91,7 +90,7 @@ window.onload = function () {
                 spritesArray.push(sprite);
             }
 
-             console.log(spritesArray);
+             // console.log(spritesArray);
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
