@@ -2,10 +2,7 @@ window.onload = function () {
 
     // The sprite object
     var spriteObject = {
-        // The name of the sprite's image file
-        image: '',
-        // sprite value
-        value: undefined,
+
         // The x and y source position of sprite's image
         sourceX: 0,
         sourceY: 0,
@@ -22,13 +19,15 @@ window.onload = function () {
         spinning: false,
     };
 
-    var imagesArray = [];
+    var loadedImagesArray = [];
+    var symbolsArray = [];
     var spritesArray = [];
     var canvasArray = [];
     var drawingSurfacesArray = [];
     var toload = 7;
     var loaded = 0;
     var drawingSurface;
+    var outputText;
 
     var spinButton = document.getElementById('spin');
     var output = document.getElementById('outcome');
@@ -37,13 +36,12 @@ window.onload = function () {
     // Preload images
     function preload(arguments) {
         for (var i = 0; i < preload.arguments.length; i++) {
-            imagesArray[i] = new Image();
-            imagesArray[i].src = preload.arguments[i];
+            loadedImagesArray[i] = new Image();
+            loadedImagesArray[i].src = preload.arguments[i];
             loaded += 1;
         }
 
-        // console.log('All images loaded');
-        // console.log(imagesArray);
+         console.log(loadedImagesArray);
     }
 
     // Initialise reels at start
@@ -65,7 +63,16 @@ window.onload = function () {
 
     // Do this when all images have loaded and reels initialised
     function loadHandler() {
+        debugger;
         if (loaded === toload) {
+            console.log('All images loaded');
+
+            // Get all images expect the button and put in symbolsArray
+            for (var i = 1; i < loadedImagesArray.length; i++) {
+                symbolsArray.push(loadedImagesArray[i]);
+                console.log(symbolsArray);
+            }
+
             canvases.forEach(canvas => {
                 canvasArray.push(canvas);
                 drawingSurface = canvas.getContext('2d');
@@ -73,20 +80,18 @@ window.onload = function () {
             });
 
             // // Check array for content
-            // console.log(canvasArray);
-            // console.log(drawingSurfacesArray);
+             console.log(canvasArray);
+             console.log(drawingSurfacesArray);
 
             // Create sprites from loaded images
-            for (var i = 1; i < imagesArray.length; i++) { // skip button
+            for (var i = 0; i < symbolsArray.length; i++) { // skip button
                 var sprite = Object.create(spriteObject);
                 sprite.x = 0;
                 sprite.y = 0;
                 spritesArray.push(sprite);
-                sprite.image = imagesArray[i];
-                sprite.value = i - 1; // Value === image index number
             }
 
-            // console.log(spritesArray);
+             console.log(spritesArray);
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
@@ -96,8 +101,8 @@ window.onload = function () {
         }
     }
 
-    // Uptade slot boxes and find matches
-    function render(randomImageNumbers) {
+    // Update slot boxes and find matches
+    function render(randomImageNumbers, outputText) {
         var i;
 
         // Do requirement checks
@@ -115,45 +120,16 @@ window.onload = function () {
             drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
 
             drawingSurface.drawImage(
-                imagesArray[randomImageNumbers[i]],
+                symbolsArray[randomImageNumbers[i]],
                 sprite.sourceX, sprite.sourceY, sprite.sourceWidth, sprite.sourceHeight,
                 sprite.x, sprite.y, sprite.width, sprite.height
             )
         }
 
-        // Find matches
-        for (i = 0; i < randomImageNumbers.length; i++) {
-            // Display the output
-            if (
-                imagesArray[randomImageNumbers[i]].src === 'http://127.0.0.1:8887/full-stack-slot/images/Symbol_0.png' &&
-                randomImageNumbers[0] == randomImageNumbers[1] && randomImageNumbers[1] == randomImageNumbers[2] ||
-                imagesArray[randomImageNumbers[i]].src === 'http://127.0.0.1:8887/full-stack-slot/images/Symbol_0.png' &&
-                randomImageNumbers[1] == randomImageNumbers[0] && randomImageNumbers[0] == randomImageNumbers[2] ||
-                imagesArray[randomImageNumbers[i]].src === 'http://127.0.0.1:8887/full-stack-slot/images/Symbol_0.png' &&
-                randomImageNumbers[2] == randomImageNumbers[1] && randomImageNumbers[1] == randomImageNumbers[0]
-            ) {
-                output.innerHTML = 'Big Win!' + 'You now have 10 free spins!';
-                // bonusGame(); // Play the bonus game
-            } else if (
-                randomImageNumbers[0] == randomImageNumbers[1] && randomImageNumbers[1] == randomImageNumbers[2] ||
-                randomImageNumbers[1] == randomImageNumbers[0] && randomImageNumbers[0] == randomImageNumbers[2] ||
-                randomImageNumbers[2] == randomImageNumbers[1] && randomImageNumbers[1] == randomImageNumbers[0]
-            ) {
-                output.innerHTML = 'Big Win!';
-            } else if (
-                randomImageNumbers[0] == randomImageNumbers[1] || randomImageNumbers[0] == randomImageNumbers[2] ||
-                randomImageNumbers[1] == randomImageNumbers[0] || randomImageNumbers[1] == randomImageNumbers[2] ||
-                randomImageNumbers[2] == randomImageNumbers[1] || randomImageNumbers[2] == randomImageNumbers[0]
-            ) {
-                output.innerHTML = 'Small Win!';
-            } else {
-                output.innerHTML = 'No Win!';
-            }
-        }
+        output.innerHTML = outputText;
     }
 
     function update() {
-        //debugger;
         // Start spinning the reels
         spriteObject.spinning = true;
 
@@ -172,7 +148,8 @@ window.onload = function () {
 
                 if (xhr.response != null) {
                     randomImageNumbers = xhr.response.numbers;
-                    render(randomImageNumbers);
+                    outputText = xhr.response.text;
+                    render(randomImageNumbers, outputText);
                 } else {
                     console.log('Error: no data');
                 }
