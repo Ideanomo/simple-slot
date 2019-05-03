@@ -27,6 +27,7 @@ window.onload = function () {
     var loaded = 0;
     var drawingSurface;
     var outputText;
+    var touch = true;
 
     var spinButton = document.getElementById('spin');
     var output = document.getElementById('outcome');
@@ -93,9 +94,22 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
-            spinButton.addEventListener('mousedown', update, false);
+            spinButton.addEventListener('touchstart', checkEvent, false);
+            spinButton.addEventListener('mousedown', checkEvent, false);
         } else {
             console.log('Loaded images does not equal expected images');
+        }
+    }
+
+    function checkEvent (e) {
+        if (touch && e.type == 'mousedown') {
+            update();
+            e.stopPropagation();         
+            e.preventDefault();   
+        } else if (touch && e.type == 'touchstart') {
+            update();
+            e.stopPropagation();
+            e.preventDefault();
         }
     }
 
