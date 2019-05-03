@@ -15,7 +15,6 @@ window.onload = function () {
         // The width and height of sprite on canvas
         width: 235,
         height: 155,
-
         spinning: false,
     };
 
@@ -61,12 +60,12 @@ window.onload = function () {
         })
     }
 
-    // Do this when all images have loaded and reels initialised
+    // Do this when all images have loaded
     function loadHandler() {
         if (loaded === toload) {
             // console.log('All images loaded');
 
-            // Get all images expect the button and put in symbolsArray
+            // Get all images except the button and put in symbolsArray
             for (var i = 1; i < loadedImagesArray.length; i++) {
                 symbolsArray.push(loadedImagesArray[i]);
                 // console.log(symbolsArray);
@@ -82,8 +81,8 @@ window.onload = function () {
              // console.log(canvasArray);
              // console.log(drawingSurfacesArray);
 
-            // Create sprites from loaded images
-            for (var i = 0; i < symbolsArray.length; i++) { // skip button
+            // Create sprites from symbols
+            for (var i = 0; i < symbolsArray.length; i++) {
                 var sprite = Object.create(spriteObject);
                 sprite.x = 0;
                 sprite.y = 0;
@@ -94,7 +93,7 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
-            spinButton.addEventListener('click', update, false);
+            spinButton.addEventListener('mousedown', update, false);
         } else {
             console.log('Loaded images does not equal expected images');
         }
@@ -128,7 +127,7 @@ window.onload = function () {
         output.innerHTML = outputText;
     }
 
-    function update() {
+    function update(event) {
         // Start spinning the reels
         spriteObject.spinning = true;
 
@@ -137,7 +136,7 @@ window.onload = function () {
         xhr.responseType = 'json';
 
         // Fetch 3 random integers from NodeJS app
-        xhr.open('GET', 'http://localhost:5000/random', true);
+        xhr.open('GET', 'http://localhost:8080/random', true);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -150,7 +149,7 @@ window.onload = function () {
                     outputText = xhr.response.text;
                     render(randomImageNumbers, outputText);
                 } else {
-                    console.log('Error: no data');
+                    alert('Error: no data');
                 }
             }
         }

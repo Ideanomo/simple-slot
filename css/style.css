@@ -9,15 +9,6 @@ body {
 	margin:0 auto;
 	width:750;
 }
-/* .slot {
-	margin-right: 2px;
-	float:left;
-	border:1px dashed rgb(141, 139, 139);
-	background-position:0 4px;
-} */
-.stage {
-	width: 705;
-}
 button {
 	border: none;
 	padding: 20px;
