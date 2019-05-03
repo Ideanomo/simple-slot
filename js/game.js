@@ -102,12 +102,12 @@ window.onload = function () {
     }
 
     function checkEvent (e) {
-        if (touch && e.type == 'mousedown') {
+        if (touch && e.type === 'mousedown') {
             update();
             e.stopPropagation();         
             e.preventDefault(); 
-            console.log(e.type)  ;
-        } else if (touch && e.type == 'touchend') {
+            console.log(e.type);
+        } else if (touch && e.type === 'touchend') {
             update();
             e.stopPropagation();
             e.preventDefault();
