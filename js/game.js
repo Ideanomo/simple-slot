@@ -94,7 +94,7 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
-            spinButton.addEventListener('touchstart', checkEvent, false);
+            spinButton.addEventListener('touchend', checkEvent, false);
             spinButton.addEventListener('mousedown', checkEvent, false);
         } else {
             console.log('Loaded images does not equal expected images');
@@ -105,11 +105,13 @@ window.onload = function () {
         if (touch && e.type == 'mousedown') {
             update();
             e.stopPropagation();         
-            e.preventDefault();   
-        } else if (touch && e.type == 'touchstart') {
+            e.preventDefault(); 
+            console.log(e.type)  ;
+        } else if (touch && e.type == 'touchend') {
             update();
             e.stopPropagation();
             e.preventDefault();
+            console.log(e.type);
         }
     }
 
