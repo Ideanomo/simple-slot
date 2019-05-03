@@ -1,0 +1,62 @@
+/*==========  Mobile First Method  ==========*/
+
+/* Custom iphone Retina */
+@media screen and (min-width: 320px) {
+    canvas.slot {
+        width: 75px;
+        height: 49px;
+    }
+    #spin {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Extra Small Devices, Phones */
+@media screen and (min-width: 480px) {
+    canvas.slot {
+        width: 95px;
+        height: 63px;
+    }
+    #spin {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/*  Small Devices, Tablets */
+@media screen and (min-width: 768px) {
+    canvas.slot {
+        width: 95px;
+        height: 63px;
+    }
+    #spin {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media screen and (min-width: 992px) {
+    canvas.slot {
+        width: 235px;
+        height: 155px;
+    }
+    #spin {
+        width: 98px;
+        height: 98px;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media screen and (min-width: 1200px) {
+    canvas.slot {
+        width: 235px;
+        height: 155px;
+    }
+    #spin {
+        width: 98px;
+        height: 98px;
+    }
+}
+

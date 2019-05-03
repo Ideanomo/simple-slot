@@ -5,10 +5,6 @@ body {
 .bd {
 	text-align:center;
 }
-.container {
-	margin:0 auto;
-	width:750;
-}
 button {
 	border: none;
 	padding: 20px;
@@ -30,7 +26,4 @@ button {
 	font-size:14px;
 	color:rgb(170, 50, 50);
 	margin-top:4px;
-}
-.clear {
-	clear:both;
 }
