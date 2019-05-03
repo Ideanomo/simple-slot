@@ -28,6 +28,8 @@ window.onload = function () {
     var drawingSurface;
     var outputText;
     var touch = true;
+    var touchX = 0;
+    var touchY = 0;
 
     var spinButton = document.getElementById('spin');
     var output = document.getElementById('outcome');
@@ -94,11 +96,20 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
-            spinButton.addEventListener('touchstart', update, false);
+            spinButton.addEventListener('touchstart', touchstarthandler, false);
             //spinButton.addEventListener('mousedown', checkEvent, false);
         } else {
             console.log('Loaded images does not equal expected images');
         }
+    }
+
+    function touchstarthandler(event) {
+        // Find the touch point's x and y position
+        touchX = event.targetTouches[0].pageX - spinButton.offsetLeft;
+        touchY = event.targetTouches[0].pageY - spinButton.offsetTop;
+
+        event.preventDefault();
+        update();
     }
 
 /*     function checkEvent (event) {
