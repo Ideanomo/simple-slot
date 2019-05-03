@@ -93,19 +93,10 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');            
-            spinButton.addEventListener('touchstart', checkEvent,false);
+            spinButton.addEventListener('click', update, false);
         } else {
             console.log('Loaded images does not equal expected images');
         }
-    }
-
-    function checkEvent (event) {
-        event.preventDefault();
-        spinButton.addEventListener('touchstart', checkEvent,false);
-        if (event.type == 'touchstart') {
-            update();
-            console.log(event.type);
-       } 
     }
 
     // Update slot boxes and find matches
