@@ -94,23 +94,23 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
-            spinButton.addEventListener('touchstart', checkEvent, false);
-            spinButton.addEventListener('mousedown', checkEvent, false);
+            spinButton.addEventListener('touchstart', update, false);
+            //spinButton.addEventListener('mousedown', checkEvent, false);
         } else {
             console.log('Loaded images does not equal expected images');
         }
     }
 
-    function checkEvent (event) {
+/*     function checkEvent (event) {
+        event.preventDefault();
        if (event.type == 'mousedown') {
             update();
-            event.preventDefault();
        } else if (touch && event.type == 'touchstart') {
             update();
             event.preventDefault();
             console.log(event.type);
        }
-    }
+    } */
 
     // Update slot boxes and find matches
     function render(randomImageNumbers, outputText) {
