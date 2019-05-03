@@ -27,9 +27,11 @@ window.onload = function () {
     var loaded = 0;
     var drawingSurface;
     var outputText;
-    var touch = true;
-    var touchX = 0;
-    var touchY = 0;
+    
+    var gnStartX = 0;
+    var gnStartY = 0;
+    var gnEndX = 0;
+    var gnEndY = 0;
 
     var spinButton = document.getElementById('spin');
     var output = document.getElementById('outcome');
@@ -96,23 +98,25 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');
-            spinButton.addEventListener('touchstart', touchstarthandler, false);
-            //spinButton.addEventListener('mousedown', checkEvent, false);
+            
+            spinButton.addEventListener('touchstart',function(event) {
+                gnStartX = event.touches[0].pageX;
+                gnStartY = event.touches[0].pageY;
+              },false);
+              spinButton.addEventListener('touchmove',function(event) {
+                gnEndX = event.touches[0].pageX;
+                gnEndY = event.touches[0].pageY;
+              },false);
+              spinButton.addEventListener('touchend',function(event) {
+                alert('START (' + gnStartX + ', ' + gnStartY + ')   END (' + gnEndX + ', ' + gnEndY + ')');
+                update();
+              },false);
         } else {
             console.log('Loaded images does not equal expected images');
         }
     }
 
-    function touchstarthandler(event) {
-        // Find the touch point's x and y position
-        touchX = event.targetTouches[0].pageX - spinButton.offsetLeft;
-        touchY = event.targetTouches[0].pageY - spinButton.offsetTop;
-
-        event.preventDefault();
-        update();
-    }
-
-/*     function checkEvent (event) {
+    function checkEvent (event) {
         event.preventDefault();
        if (event.type == 'mousedown') {
             update();
@@ -121,7 +125,7 @@ window.onload = function () {
             event.preventDefault();
             console.log(event.type);
        }
-    } */
+    }
 
     // Update slot boxes and find matches
     function render(randomImageNumbers, outputText) {
