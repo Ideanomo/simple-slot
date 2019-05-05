@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 
-/* app.use(function(req, res, next) {
+app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
- */
+
 app.get('/', (req, res) => {
     res.send('NodeJS app');
 });
@@ -36,9 +36,8 @@ app.get('/random', (req, res) => {
 
     console.log(randomImageNumbers, typeof(randomImageNumbers) + ' ' + outputText, typeof(outputText));;
 
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+    //res.header("Access-Control-Allow-Origin", "*");
+    
     res.json({
         'numbers': randomImageNumbers, 
         'text': outputText
