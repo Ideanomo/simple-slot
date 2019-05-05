@@ -27,6 +27,7 @@ window.onload = function () {
     var loaded = 0;
     var drawingSurface;
     var outputText;
+    var isTouching = false;
 
     var spinButton = document.getElementById('spin');
     var output = document.getElementById('outcome');
@@ -93,10 +94,25 @@ window.onload = function () {
 
             // Add spin button
             spinButton.setAttribute('src', 'images/button.png');            
-            spinButton.addEventListener('click', update, false);
+            spinButton.addEventListener('mousedown', checkEvent, false);
+            spinButton.addEventListener('touchstart', checkEvent, false);
         } else {
             console.log('Loaded images does not equal expected images');
         }
+    }
+
+    function checkEvent (event) {
+       if (event.type == 'mousedown') {
+           isTouching = false;
+           event.preventDefault();
+            console.log('mousedown event');
+            update();
+       } else {
+           event.preventDefault();
+           isTouching = true;
+           alert('touch event');
+           update();
+       }
     }
 
     // Update slot boxes and find matches
