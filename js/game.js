@@ -128,8 +128,6 @@ window.onload = function () {
     }
 
     function update(event) {
-        alert(event.type);
-        
         // Start spinning the reels
         spriteObject.spinning = true;
 
