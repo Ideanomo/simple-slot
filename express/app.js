@@ -3,12 +3,14 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
+app.options('*', cors());
+cors({credentials: true, origin: true});
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
     res.send('NodeJS app');
 });
 
-app.get('/random', (req, res) => {
+app.get('/random', (req, res, next) => {
     let randomImageNumbers = [];
     let num;
     let outputText = '';
@@ -33,7 +35,7 @@ app.get('/random', (req, res) => {
 
     console.log(randomImageNumbers, typeof(randomImageNumbers) + ' ' + outputText, typeof(outputText));;
 
-    //res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*");
 
     res.json({
         'numbers': randomImageNumbers, 
