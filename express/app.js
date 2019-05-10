@@ -1,10 +1,17 @@
 const express = require('express');
+let router = express.Router();
 const cors = require('cors');
 const app = express();
+
+router.options('/', cors());
+router.get('/', cors());
+module.exports = router;
 
 app.use(cors());
 app.options('*', cors());
 cors({credentials: true, origin: true});
+
+
 
 app.get('/', (req, res, next) => {
     res.send('NodeJS app');
