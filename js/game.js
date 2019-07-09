@@ -172,4 +172,4 @@ window.onload = function () {
     initReels();
     loadHandler();
 };
-//TODO: Do a pull first, Commit new changes, Implement in Bonus game, Fix working on mobile. is it CORS?
+//TODO: Implement in Bonus game, Mobile?
