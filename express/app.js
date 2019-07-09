@@ -1,28 +1,16 @@
 const express = require('express');
-let router = express.Router();
-const cors = require('cors');
 const app = express();
 
-router.options('/', cors());
-router.get('/', cors());
-module.exports = router;
-
-app.use(cors());
-app.options('*', cors());
-cors({credentials: true, origin: true});
-
-
-
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
     res.send('NodeJS app');
 });
 
-app.get('/random', (req, res, next) => {
+app.get('/random', (req, res) => {
     let randomImageNumbers = [];
     let num;
     let outputText = '';
 
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         num = Math.floor(Math.random() * 6);
         randomImageNumbers.push(num);
     }
@@ -40,7 +28,7 @@ app.get('/random', (req, res, next) => {
             outputText = 'No Win!';
         }
 
-    console.log(randomImageNumbers, typeof(randomImageNumbers) + ' ' + outputText, typeof(outputText));;
+    console.log('Array: ' + randomImageNumbers + ' ' + 'Result: ' + outputText);
 
     res.header("Access-Control-Allow-Origin", "*");
 

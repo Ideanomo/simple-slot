@@ -65,8 +65,8 @@ window.onload = function () {
         if (loaded === toload) {
             // console.log('All images loaded');
 
-            // Get all images except the button and put in symbolsArray
-            for (var i = 1; i < loadedImagesArray.length; i++) {
+            // Get all images except the button and put in symbolsArray; as button is index 0, start from index 1 to skip it.
+            for (i = 1; i < loadedImagesArray.length; i++) {
                 symbolsArray.push(loadedImagesArray[i]);
                 // console.log(symbolsArray);
             }
@@ -128,6 +128,7 @@ window.onload = function () {
     }
 
     function update(event) {
+        //alert(event.type);
         // Start spinning the reels
         spriteObject.spinning = true;
 
@@ -140,9 +141,9 @@ window.onload = function () {
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                var type = xhr.getResponseHeader("Content-Type");
-                console.log("Content-Type: " + type);
-                console.log("Status: " + this.statusText);
+                // var type = xhr.getResponseHeader("Content-Type");
+                // console.log("Content-Type: " + type);
+                // console.log("Status: " + this.statusText);
 
                 if (xhr.response != null) {
                     randomImageNumbers = xhr.response.numbers;
@@ -152,7 +153,7 @@ window.onload = function () {
                     alert('Error: no data');
                 }
             }
-        }
+        };
 
         xhr.send();
     }
@@ -170,4 +171,5 @@ window.onload = function () {
 
     initReels();
     loadHandler();
-}
+};
+//TODO: Do a pull first, Commit new changes, Implement in Bonus game, Fix working on mobile. is it CORS?
