@@ -3,7 +3,7 @@ const app = express();
 const fs = require('fs');
 const path = require('path');
 
-app.use(express.static('public'));
+app.use(express.static('docs'));
 
 app.get('/', (req, res) => {
     let lookup = path.basename(decodeURI(req.url)) ||
