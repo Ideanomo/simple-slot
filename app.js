@@ -1,8 +1,18 @@
 const express = require('express');
 const app = express();
+const fs = require('fs');
+const path = require('path');
+
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.send('NodeJS app');
+    let lookup = path.basename(decodeURI(req.url)) ||
+        'index.html';
+    let f = 'public/' + lookup;
+
+    console.log(fs.existsSync(f) ? lookup + " file exist" : lookup + "file doesn't exist");
+
+    // res.sendFile('index.html');
 });
 
 app.get('/random', (req, res) => {
@@ -33,10 +43,12 @@ app.get('/random', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
     res.json({
-        'numbers': randomImageNumbers, 
+        'numbers': randomImageNumbers,
         'text': outputText
     });
+
+    res.send();
 });
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(port, () => console.log(`Slot app istening on port ${port}...`));
