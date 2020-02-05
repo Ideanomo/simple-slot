@@ -8,7 +8,7 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     let lookup = path.basename(decodeURI(req.url)) ||
         'index.html';
-    let f = 'public/' + lookup;
+    let f = 'docs/' + lookup;
 
     console.log(fs.existsSync(f) ? lookup + " file exist" : lookup + "file doesn't exist");
 
