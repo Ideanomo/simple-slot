@@ -132,7 +132,7 @@ window.onload = function () {
 
         output.innerHTML = outputText;
 
-        if (bonusGame && wilds === 2) {
+        if (bonusGame && wilds === 3) {
             // bonusOutput.innerHTML = bonusMessage;
             output.innerHTML += " " + bonusMessage;
             window.setTimeout(playBonus, 3000);
