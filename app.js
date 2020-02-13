@@ -36,10 +36,10 @@ app.get('/random', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
     // Bonus game
-    let numberOfFreeSpins = 0;
+    let numberOfWilds = 0;
     randomImageNumbers.map(function (num, i) {
         if (bonusSymbol === num) {
-            numberOfFreeSpins++;
+            numberOfWilds++;
             bonusGame = true;
         }
     });
@@ -47,8 +47,9 @@ app.get('/random', (req, res) => {
     res.json({
         'numbers': randomImageNumbers,
         'text': outputText,
-        'bonusGame': numberOfFreeSpins,
-        'bonusMessage': "You've won " + numberOfFreeSpins + " free spin"
+        'wilds': numberOfWilds,
+        'bonusGame': bonusGame,
+        'bonusMessage': "You've won a free spin..."
     });
 
     res.send();

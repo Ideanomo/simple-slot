@@ -106,7 +106,7 @@ window.onload = function () {
     }
 
     // Update slot boxes and find matches
-    function render(randomImageNumbers, outputText, bonusGame, bonusMessage) {
+    function render(randomImageNumbers, outputText, bonusGame, bonusMessage, wilds) {
         let i;
 
         // Do requirement checks
@@ -132,14 +132,15 @@ window.onload = function () {
 
         output.innerHTML = outputText;
 
-        if (bonusGame && bonusGame === 2) {
-            bonusOutput.innerHTML = bonusMessage;
+        if (bonusGame && wilds === 2) {
+            // bonusOutput.innerHTML = bonusMessage;
+            output.innerHTML += " " + bonusMessage;
             window.setTimeout(playBonus, 3000);
         }
     }
 
     function playBonus () {
-        bonusOutput.innerHTML = "";
+        // bonusOutput.innerHTML = "";
         update();
     }
 
@@ -165,10 +166,11 @@ window.onload = function () {
                     console.log(xhr.response);
                     let randomImageNumbers = xhr.response.numbers;
                     let bonusGame = xhr.response.bonusGame;
+                    let wilds = xhr.response.wilds;
 
                     outputText = xhr.response.text;
                     bonusText = xhr.response.bonusMessage;
-                    render(randomImageNumbers, outputText, bonusGame, bonusText);
+                    render(randomImageNumbers, outputText, bonusGame, bonusText, wilds);
                 } else {
                     alert('Error: no data');
                 }
