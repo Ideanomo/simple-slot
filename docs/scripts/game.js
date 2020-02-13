@@ -27,10 +27,15 @@ window.onload = function () {
     let loaded = 0;
     let drawingSurface;
     let outputText;
+    let bonusText;
 
     let spinButton = document.getElementById('spin');
     let output = document.getElementById('outcome');
+    let bonusOutput = document.getElementById('bonusMessage');
     let canvases = document.querySelectorAll('canvas');
+
+    output.innerHTML = " ";
+    bonusOutput.innerHTML = "";
 
     // Preload images
     function preload(arguments) {
@@ -64,7 +69,7 @@ window.onload = function () {
     // Do this when all images have loaded
     function loadHandler() {
         if (loaded === toload) {
-            console.log('All images loaded');
+            // console.log('All images loaded');
 
             // Get all images except the button and put in symbolsArray; as button is index 0, start from index 1 to skip it.
             for (var i = 1; i < loadedImagesArray.length; i++) {
@@ -101,7 +106,7 @@ window.onload = function () {
     }
 
     // Update slot boxes and find matches
-    function render(randomImageNumbers, outputText) {
+    function render(randomImageNumbers, outputText, bonusGame, bonusMessage) {
         let i;
 
         // Do requirement checks
@@ -126,6 +131,16 @@ window.onload = function () {
         }
 
         output.innerHTML = outputText;
+
+        if (bonusGame && bonusGame === 2) {
+            bonusOutput.innerHTML = bonusMessage;
+            window.setTimeout(playBonus, 3000);
+        }
+    }
+
+    function playBonus () {
+        bonusOutput.innerHTML = "";
+        update();
     }
 
     function update(event) {
@@ -147,9 +162,13 @@ window.onload = function () {
                 // console.log("Status: " + this.statusText);
 
                 if (xhr.response != null) {
+                    console.log(xhr.response);
                     let randomImageNumbers = xhr.response.numbers;
+                    let bonusGame = xhr.response.bonusGame;
+
                     outputText = xhr.response.text;
-                    render(randomImageNumbers, outputText);
+                    bonusText = xhr.response.bonusMessage;
+                    render(randomImageNumbers, outputText, bonusGame, bonusText);
                 } else {
                     alert('Error: no data');
                 }

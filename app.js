@@ -5,18 +5,10 @@ const path = require('path');
 
 app.use(express.static('docs'));
 
-app.get('/', (req, res) => {
-    let lookup = path.basename(decodeURI(req.url)) ||
-        'index.html';
-    let f = 'docs/' + lookup;
-
-    console.log(fs.existsSync(f) ? lookup + " file exist" : lookup + "file doesn't exist");
-
-    // res.sendFile('index.html');
-});
-
 app.get('/random', (req, res) => {
     let randomImageNumbers = [];
+    let bonusSymbol = 0;
+    let bonusGame = false;
     let num;
     let outputText = '';
 
@@ -38,17 +30,29 @@ app.get('/random', (req, res) => {
             outputText = 'No Win!';
         }
 
-    console.log('Array: ' + randomImageNumbers + ' ' + 'Result: ' + outputText);
+
+    console.log(`Array ${randomImageNumbers} | Result ${outputText} | Bonus game ${bonusGame}`);
 
     res.header("Access-Control-Allow-Origin", "*");
 
+    // Bonus game
+    let numberOfFreeSpins = 0;
+    randomImageNumbers.map(function (num, i) {
+        if (bonusSymbol === num) {
+            numberOfFreeSpins++;
+            bonusGame = true;
+        }
+    });
+
     res.json({
         'numbers': randomImageNumbers,
-        'text': outputText
+        'text': outputText,
+        'bonusGame': numberOfFreeSpins,
+        'bonusMessage': "You've won " + numberOfFreeSpins + " free spin"
     });
 
     res.send();
 });
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Slot app istening on port ${port}...`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
