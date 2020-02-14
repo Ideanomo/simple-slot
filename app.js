@@ -3,8 +3,10 @@ const app = express();
 const fs = require('fs');
 const path = require('path');
 
+// Serve static files from docs directory
 app.use(express.static('docs'));
 
+// Set up route
 app.get('/random', (req, res) => {
     let randomImageNumbers = [];
     let bonusSymbol = 0;
@@ -12,6 +14,7 @@ app.get('/random', (req, res) => {
     let num;
     let outputText = '';
 
+    // Generate random numbers
     for (let i = 0; i < 3; i++) {
         num = Math.floor(Math.random() * 6);
         randomImageNumbers.push(num);

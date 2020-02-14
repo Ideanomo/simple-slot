@@ -2,7 +2,6 @@ window.onload = function () {
 
     // The sprite object
     let spriteObject = {
-
         // The x and y source position of sprite's image
         sourceX: 0,
         sourceY: 0,
@@ -31,11 +30,9 @@ window.onload = function () {
 
     let spinButton = document.getElementById('spin');
     let output = document.getElementById('outcome');
-    let bonusOutput = document.getElementById('bonusMessage');
     let canvases = document.querySelectorAll('canvas');
 
     output.innerHTML = " ";
-    bonusOutput.innerHTML = "";
 
     // Preload images
     function preload(arguments) {
@@ -133,14 +130,12 @@ window.onload = function () {
         output.innerHTML = outputText;
 
         if (bonusGame && wilds === 3) {
-            // bonusOutput.innerHTML = bonusMessage;
             output.innerHTML += " " + bonusMessage;
             window.setTimeout(playBonus, 3000);
         }
     }
 
     function playBonus () {
-        // bonusOutput.innerHTML = "";
         update();
     }
 

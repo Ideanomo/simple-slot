@@ -11,7 +11,7 @@ button {
 	background-color: transparent;
 	outline: none !important;
 }
-#outcome #bonusMessage {
+#outcome {
 	font-size:32px;
 	font-weight:lighter;
 	height:22px;
