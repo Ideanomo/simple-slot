@@ -4,7 +4,8 @@
   "description": "REST node app",
   "main": "app.js",
   "scripts": {
-    "test": "\"echo \\\"Error: not test specified\\\" && exit 1\""
+    "test": "\"echo \\\"Error: not test specified\\\" && exit 1\"",
+    "start": "node app.js"
   },
   "author": "Dan",
   "license": "ISC",
