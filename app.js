@@ -34,7 +34,7 @@ app.get('/random', (req, res) => {
         }
 
 
-    console.log(`Array ${randomImageNumbers} | Result ${outputText} | Bonus game ${bonusGame}`);
+    console.log(`Array[${randomImageNumbers}] | Result: ${outputText} | Bonus game: ${bonusGame}`);
 
     res.header("Access-Control-Allow-Origin", "*");
 
@@ -43,7 +43,9 @@ app.get('/random', (req, res) => {
     randomImageNumbers.map(function (num, i) {
         if (bonusSymbol === num) {
             numberOfWilds++;
-            bonusGame = true;
+            if (numberOfWilds === 3) {
+                bonusGame = true;
+            }
         }
     });
 
